@@ -11,11 +11,12 @@ class API < Grape::API
       error!({status: e.status,message: e.message,errors: e.errors}, e.status)
   end
 
-  helpers Helpers::SessionHelpers
+  helpers SessionHelpers
   
   mount Employee::Data
   mount Events::Data
   mount Locations::Data
+  mount SignUp
   	
   add_swagger_documentation(
         api_version: "v1",

@@ -1,13 +1,26 @@
 module Events
   class Data < Grape::API
+    before do
+      validate_token!
+    end  
 
     resource :events do
-      desc "List all events"
+      desc "List all events", headers: {
+          "Authorization" => {
+          description: "JWS Token which validates your identity",
+          required: true
+        }
+      }
       get do
         Event.all
       end
 
-      desc "create a new event"
+      desc "create a new event", headers: {
+        "Authorization" => {
+          description: "JWS Token which validates your identity",
+          required: true
+        }
+      }
       params do
       	requires :name, type: String
       	requires :desc, type: String
