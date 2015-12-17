@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216105525) do
+ActiveRecord::Schema.define(version: 20151217144137) do
 
   create_table "emp_data", force: :cascade do |t|
     t.string   "name"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20151216105525) do
     t.string   "name"
     t.string   "description"
     t.decimal  "latitude"
-    t.decimal  "longiotude"
+    t.decimal  "longitude"
     t.boolean  "deleted"
     t.integer  "user_id"
     t.string   "image"
@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(version: 20151216105525) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "auth_token"
+    t.string   "password_digest"
   end
 
 end

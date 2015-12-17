@@ -8,7 +8,6 @@ module SessionHelpers extend Grape::API::Helpers
 	def validate_token!
 		begin 
 			payload = TokenProvider.valid?(token)
-			byebug
 			payload_user_id = payload.first["user_id"]
 			@current_user = User.find(payload_user_id)
 		rescue
@@ -28,5 +27,10 @@ module SessionHelpers extend Grape::API::Helpers
     	token = TokenProvider.issue_token({user_id: user.id})
     	user.update_attributes(auth_token: token)
     	return token
+    end
+
+    def authorize!(user, password)
+ 		has_valid_password = user && user.authenticate(password)
+ 		error!('Unauthorized', 401) unless has_valid_password
     end	
 end	

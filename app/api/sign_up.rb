@@ -3,6 +3,7 @@ class SignUp < Grape::API
 	params do 
 		requires :username, type: String, desc: 'Username'
 		requires :password, type: String, desc: 'User password'
+		requires :password_confirmation, type: String, desc: 'Password confirmation'
 	end
 
 	post :signup do
@@ -12,7 +13,7 @@ class SignUp < Grape::API
 			error!('400 user with username ' + params[:username] + 'already exists!', 400)
 		else
 			byebug
-			user = User.new({username: params[:username],password: params[:password]})
+			user = User.new({username: params[:username],password: params[:password], password_confirmation: params[:password_confirmation]})
 			byebug
 			if !user.valid?
 				error!('400 error message' + user.errors.messages.to_json, 400)
