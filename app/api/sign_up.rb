@@ -8,7 +8,6 @@ class SignUp < Grape::API
 
 	post :signup do
 		user = User.find_by_username(params[:username])
-		byebug
 		if user.present?
 			error!('400 user with username ' + params[:username] + 'already exists!', 400)
 		else
