@@ -12,9 +12,7 @@ class SignUp < Grape::API
 		if user.present?
 			error!('400 user with username ' + params[:username] + 'already exists!', 400)
 		else
-			byebug
 			user = User.new({username: params[:username],password: params[:password], password_confirmation: params[:password_confirmation]})
-			byebug
 			if !user.valid?
 				error!('400 error message' + user.errors.messages.to_json, 400)
 			end

@@ -16,6 +16,7 @@ class API < Grape::API
   mount Employee::Data
   mount Events::Data
   mount Locations::Data
+  mount Devices::Data
   mount SignUp
   mount Auth
   	
