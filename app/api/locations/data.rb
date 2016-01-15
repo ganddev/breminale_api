@@ -27,13 +27,11 @@ module Locations
 				optional :description, type: String, desc: "description for the location"
 			end
 			post do
-				user = User.find_by_auth_token(token)
-				if user.present?
+				if current_user.present?
 					{ 'declared_params' => declared(params, include_missing: false) }
-					location = Location.new({name: params[:name], latitude: params[:latitude], longitude: params[:longitude], user: user, description: params[:description], image: params[:image_url]})
+					location = Location.new({name: params[:name], latitude: params[:latitude], longitude: params[:longitude], user: current_user, description: params[:description], image: params[:image_url]})
 					if location.valid?
 						location.save
-						{"msg" => "Added location", "location" => location.to_json}
 					end	
 				end
 			end	
@@ -51,10 +49,10 @@ module Locations
 				requires :longitude, type: BigDecimal
 			end	
 			put ':id' do
-				location = Location.find_by_id(id)
+				location = Location.find_by_id(parms[:id])
 				if location.present?
 					if location.isAllowedToEditLocation(current_user)
-
+						updatedLocation = Location.update(params[:id], params)
 					else
 						error!("403 - Not allowed to update location", 403)
 					end	
@@ -74,7 +72,7 @@ module Locations
 			end
 			
 			delete ':id' do
-				location = Location.find_by_id(id)
+				location = Location.find_by_id(params[:id])
 				if location.present?
 					if location.isAllowedToEditLocation(current_user)
 						location.destroy
