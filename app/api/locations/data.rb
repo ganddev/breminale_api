@@ -65,7 +65,6 @@ module Locations
 			params do
 				requires :id, type: Integer, desc: "id of the location"
 			end
-			
 			delete ':id' do
 				location = Location.find_by_id(id)
 				if location.present?
