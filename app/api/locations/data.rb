@@ -21,8 +21,8 @@ module Locations
 			}
 			params do
 				requires :name, type: String , desc: "Name of the location"
-				requires :latitude, type: BigDecimal, desc: "Latitude of the location"
-				requires :longitude, type: BigDecimal, desc: "Longitude of the location"
+				requires :latitude, type: Float, values: -90.0..+90.0,  desc: "Latitude of the location"
+				requires :longitude, type: Float, values: -180.0..+180.0, desc: "Longitude of the location"
 				optional :image_url, type: String, desc: "An image of the location"
 				optional :description, type: String, desc: "description for the location"
 			end
@@ -47,8 +47,8 @@ module Locations
 			params do
         		requires :id, type: Integer, desc: 'id of a location'
 				requires :name, type: String
-				requires :latitude, type: BigDecimal
-				requires :longitude, type: BigDecimal
+				requires :latitude, type: Float, values: -90.0..+90.0,  desc: "Latitude of the location"
+				requires :longitude, type: Float, values: -180.0..+180.0, desc: "Longitude of the location"
 			end	
 			put ':id' do
 				location = Location.find_by_id(id)

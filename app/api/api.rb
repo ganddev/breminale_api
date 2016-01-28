@@ -13,7 +13,6 @@ class API < Grape::API
 
   helpers SessionHelpers
   
-  mount Employee::Data
   mount Events::Data
   mount Locations::Data
   mount Devices::Data

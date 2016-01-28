@@ -1,9 +1,9 @@
 module Events
   class Data < Grape::API
+    
     before do
       validate_token!
-    end  
-
+    end
     resource :events do
       desc "List all events", headers: {
           "Authorization" => {
