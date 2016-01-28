@@ -25,8 +25,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rack-cors', :require => 'rack/cors'
 gem 'grape'
+gem 'grape-entity'
 gem 'grape-swagger'
-gem 'grape-resources'
 gem 'sorcery'
 gem 'jwt'
 
