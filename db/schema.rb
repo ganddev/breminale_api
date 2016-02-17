@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160115144014) do
 
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160115144014) do
   end
 
   add_index "events", ["breminale_date_id"], name: "index_events_on_breminale_date_id", using: :btree
-
+  add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "locations", force: :cascade do |t|

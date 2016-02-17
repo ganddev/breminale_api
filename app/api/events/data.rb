@@ -22,7 +22,7 @@ module Events
         }
       }
       params do
-        requires :all, using: Event.documentation
+        requires :all, using: Entities::Event.documentation
       end
       put ':id' do
         event = Event.find_by_id(params[:id])
@@ -50,8 +50,8 @@ module Events
       delete ':id' do
         event = Event.find_by_id(params[:id])
         if event.present?
-            if event.isAllowedToEdit(current_user)
-              event.destroy
+            if can? :delete, event
+              
             else
               error!("403 - Forbidden to edit event", 403)
             end
@@ -68,7 +68,7 @@ module Events
         }
       }
       params do
-        requires :all, except: [:id], using: Event.documentation.except(:id)
+        requires :all, except: [:id], using: Entities::Event.documentation.except(:id)
       end
       post do
         if current_user.present?

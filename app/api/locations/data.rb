@@ -11,7 +11,8 @@ module Locations
         		}
 			}
 			get do
-				Location.all
+				locations = Location.all
+				present locations, with: Entities::Location
 			end
 			desc "Creates a location", headers: {
 				"Authorization" => {
@@ -20,14 +21,15 @@ module Locations
         		}
 			}
 			params do
-				requires :all, except: [:id], using: Location.documentation.except(:id)
+				requires :all, except: [:id], using: Entities::Location.documentation.except(:id)
 			end
 			post do
 				if current_user.present?
 					{ 'declared_params' => declared(params, include_missing: false) }
-					location = Location.new({name: params[:name], latitude: params[:latitude], longitude: params[:longitude], user: current_user, description: params[:description], image: params[:image_url]})
-					if location.valid?
-						location.save
+					location = ::Location.create({name: params[:name], latitude: params[:latitude], longitude: params[:longitude], user: current_user, description: params[:description], image: params[:image_url]})
+					byebug
+					if !location.valid?
+						error!('400 error message' + location.errors.messages.to_json, 400)
 					end	
 				end
 			end	
@@ -39,10 +41,10 @@ module Locations
         		}
 			}
 			params do
-        		requires :all, using: Location.documentation
+        		requires :all, using: Entities::Location.documentation
 			end	
 			put ':id' do
-				location = Location.find_by_id(parms[:id])
+				location = ::Location.find_by_id(parms[:id])
 				if location.present?
 					if location.isAllowedToEditLocation(current_user)
 						updatedLocation = Location.update(params[:id], params)
