@@ -16,8 +16,6 @@ class API < Grape::API
   mount Events::Data
   mount Locations::Data
   mount Devices::Data
-  mount SignUp
-  mount Auth
   	
   add_swagger_documentation(
         api_version: "v1",

@@ -1,7 +1,7 @@
 module Locations
 	class Data < Grape::API
 		resource :locations do 
-			desc "List all locations"
+			desc "List all dates"
 			get do
 				locations = Location.all
 				present locations, with: Entities::Location
@@ -16,4 +16,4 @@ module Locations
     		end
 		end
 	end
-end
+end	
