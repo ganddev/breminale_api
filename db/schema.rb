@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128150520) do
+ActiveRecord::Schema.define(version: 20160115144014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "breminale_dates", force: :cascade do |t|
+    t.datetime "my_date"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "breminale_dates", ["user_id"], name: "index_breminale_dates_on_user_id", using: :btree
 
   create_table "emp_data", force: :cascade do |t|
     t.string   "name"
@@ -28,11 +37,15 @@ ActiveRecord::Schema.define(version: 20160128150520) do
     t.string   "name"
     t.string   "desc"
     t.string   "image_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "user_id"
+    t.integer  "location_id"
+    t.integer  "breminale_date_id"
   end
 
+  add_index "events", ["breminale_date_id"], name: "index_events_on_breminale_date_id", using: :btree
+  add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
@@ -57,6 +70,9 @@ ActiveRecord::Schema.define(version: 20160128150520) do
     t.string   "password_digest"
   end
 
+  add_foreign_key "breminale_dates", "users"
+  add_foreign_key "events", "breminale_dates"
+  add_foreign_key "events", "locations"
   add_foreign_key "events", "users"
   add_foreign_key "locations", "users"
 end

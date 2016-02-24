@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.2.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -35,14 +35,28 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rpush'
 
+#Authorization
+gem 'cancancan', '~> 1.10'
+
+gem 'factory_girl_rails', :group => [:development, :test]
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :test do
+  gem 'database_cleaner'
+  gem 'email_spec'
+  gem 'launchy'
+  gem 'capybara'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # rspec for unit test
+  gem 'rspec-rails', '~> 3.0'
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views

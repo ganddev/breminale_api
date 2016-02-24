@@ -1,19 +1,18 @@
-module Locations
+module Dates
 	class Data < Grape::API
-		resource :locations do 
-			desc "List all dates"
+		resource :dates do
+			desc "list all dates"
 			get do
-				locations = Location.all
-				present locations, with: Entities::Location
+				BreminaleDates.all
 			end
-			desc "Returns a single location"
-			params do 
-        		requires :id, type: Integer, desc: "Id of the location"
-      		end
-      		get ':id' do
-      			location = ::Location.find_by_id(params[:id])
-      			present location, with: Entities::Location
-    		end
+
+			desc "Return on date object"
+			params do
+				requires :id, type: Integer, desc: "Desc of the date"
+			end
+			get ':id' do
+				BreminaleDates.find_by_id(params[:id])
+			end
 		end
 	end
 end	
