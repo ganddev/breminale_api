@@ -1,4 +1,5 @@
-class Entities::Location < Grape::Entity
+module Entities
+	class Entities::LocationEntity < ::Grape::Entity
 		expose :id, documentation: {type: Integer, desc: "Id of the Location"}
 		expose :name, documentation: {type: String , desc: "Name of the location"}
 		expose :latitude, documentation: {type: Float, values: -90.0..+90.0,  desc: "Latitude of the location"}
@@ -6,3 +7,4 @@ class Entities::Location < Grape::Entity
 		expose :image_url, documentation: {type: String, desc: "An image of the location"}
 		expose :description, documentation: {type: String, desc: "Description for the location"}
 	end
+end

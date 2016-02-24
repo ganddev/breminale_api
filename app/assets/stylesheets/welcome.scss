@@ -1,0 +1,12 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#intro-header {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  margin-top: -20px;
+  color: #fff;
+  background: image-url('landingpage_background.jpeg');
+  background-size: cover;
+  height: calc(100vh - 50px);
+}

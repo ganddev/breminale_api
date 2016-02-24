@@ -4,7 +4,7 @@ module Events
       desc "List all events"
       get do
         events  = ::Event.all
-        present events, with: Entities::Event
+        present events, with: Entities::EventEntity
       end
       desc "Returns a single event"
       params do
@@ -12,7 +12,7 @@ module Events
       end
       get ':id' do
         event = ::Event.find_by_id(id)
-        present event, with: Entities::Event
+        present event, with: Entities::EventEntity
       end
     end
   end
