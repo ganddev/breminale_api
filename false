@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20160225192314_add_deleted_to_events.rb

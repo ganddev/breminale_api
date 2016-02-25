@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224174538) do
+ActiveRecord::Schema.define(version: 20160225194035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "breminale_dates", force: :cascade do |t|
-    t.datetime "my_date"
+    t.datetime "date_day"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,13 +35,14 @@ ActiveRecord::Schema.define(version: 20160224174538) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.string   "desc"
+    t.string   "description"
     t.string   "image_url"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "user_id"
     t.integer  "location_id"
     t.integer  "breminale_date_id"
+    t.boolean  "deleted",           default: false
   end
 
   add_index "events", ["breminale_date_id"], name: "index_events_on_breminale_date_id", using: :btree
@@ -55,7 +56,7 @@ ActiveRecord::Schema.define(version: 20160224174538) do
     t.decimal  "longitude"
     t.boolean  "deleted"
     t.integer  "user_id"
-    t.string   "image"
+    t.string   "image_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

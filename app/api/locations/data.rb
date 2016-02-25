@@ -3,7 +3,7 @@ module Locations
 		resource :locations do 
 			desc "List all locations"
 			get do
-				locations = Location.all
+				locations = ::Location.all
 				present locations, with: Entities::LocationEntity
 			end
 			desc "Returns a single location"
