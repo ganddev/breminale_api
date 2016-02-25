@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225194035) do
+ActiveRecord::Schema.define(version: 20160225195630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 20160225194035) do
     t.integer  "location_id"
     t.integer  "breminale_date_id"
     t.boolean  "deleted",           default: false
+    t.date     "start_time"
+    t.string   "soundcloud_url"
+    t.string   "String"
   end
 
   add_index "events", ["breminale_date_id"], name: "index_events_on_breminale_date_id", using: :btree

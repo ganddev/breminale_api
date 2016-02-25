@@ -11,7 +11,7 @@ module Locations
         		requires :id, type: Integer, desc: "Id of the location"
       		end
       		get ':id' do
-      			location = ::Location.find_by_id(params[:id])
+      			location = ::Location.find_by_id!(params[:id])
       			present location, with: Entities::LocationEntity
     		end
 		end

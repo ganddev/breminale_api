@@ -11,7 +11,7 @@ module Events
         requires :id, type: Integer, desc: "Id of the event"
       end
       get ':id' do
-        event = ::Event.find_by_id(id)
+        event = ::Event.find_by_id!(params[:id])
         present event, with: Entities::EventEntity
       end
     end

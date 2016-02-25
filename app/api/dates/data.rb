@@ -11,7 +11,7 @@ module Dates
 				requires :id, type: Integer, desc: "Desc of the date"
 			end
 			get ':id' do
-				date = ::BreminaleDate.find_by_id(params[:id])
+				date = ::BreminaleDate.find_by_id!(params[:id])
 				present date, with: Entities::BreminaleDateEntity
 			end
 		end
