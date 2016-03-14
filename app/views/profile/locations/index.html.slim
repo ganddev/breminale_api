@@ -23,7 +23,7 @@
                  =link_to 'Bearbeiten', edit_profile_location_path(location)
             td
               - if policy(location).destroy?
-                 =link_to, 'Löschen' [:profile, location], method: :delete, data: {confirm: 'Wirklich löschen?'}
+                 =link_to 'Löschen', [:profile, location], method: :delete, data: {confirm: 'Wirklich löschen?'}
 
 
 = link_to 'Neue Location', new_profile_location_path

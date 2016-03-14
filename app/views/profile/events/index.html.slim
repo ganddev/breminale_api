@@ -1,0 +1,19 @@
+.row
+  .col-xs-12
+    table.table.table-hover.table-responsive
+      thead
+        tr
+          th #
+          th Name
+          th Beschreibung
+          th Location
+      tbody
+        - @events.each do |event|
+          tr
+            td= event.id
+            td= event.name
+            td= event.description
+            td= event.location.name
+            
+= link_to 'Neues Event', new_profile_event_path
+
