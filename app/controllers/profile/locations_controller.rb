@@ -27,7 +27,7 @@ class Profile::LocationsController < ApplicationController
     @location = current_user.locations.create!(location_params)
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        format.html { redirect_to @profile_location, notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }

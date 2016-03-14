@@ -44,6 +44,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rpush'
 
+gem "pundit"
+
 #Authorization
 gem 'cancancan', '~> 1.10'
 
