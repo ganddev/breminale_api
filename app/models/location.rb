@@ -12,6 +12,11 @@ class Location < ActiveRecord::Base
 		self.deleted = false
 	end
 
+	def self.values
+		::Location.all.map do |location|
+			[location.name, location.id]
+		end
+	end
 
 	def isAllowedToEditLocation?(user)
 		if self.user.id == user.id
