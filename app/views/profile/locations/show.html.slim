@@ -1,0 +1,28 @@
+.row
+  .col-xs-12
+    .row
+      .col-xs-12.col-lg-6
+        .thumbnail
+          - if @location.image_url
+            = image_tag @location.image.url
+      .col-xs-12.col-lg-6
+        .list-group
+          .list-group-item
+            p.text-muted Name
+            h4= @location.name
+            
+          .list-group-item
+            p.text-muted Beschreibung
+            h4= @location.description
+            
+          .list-group-item
+            p.text-muted Latitude
+            h4= @location.latitude
+            
+          .list-group-item
+            p.text-muted Longitude
+            h4= @location.longitude
+        
+        
+= link_to 'Editieren', edit_profile_location_path(@location)
+= link_to 'Zurück', profile_locations_path
