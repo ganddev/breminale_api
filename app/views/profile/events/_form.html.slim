@@ -1,10 +1,8 @@
 = bootstrap_form_for([:profile, @event], multipart: true) do |f|
-
   javascript:
-    $(function() {
-      $('#datetimepicker3').datetimepicker({
-        pickDate: false
-      });
+    SC.initialize({
+      client_id: '469443570702bcc59666de5950139327',
+      redirect_uri: 'http://example.com/callback'
     });
   .row
     .col-xs-12.col-md-6
