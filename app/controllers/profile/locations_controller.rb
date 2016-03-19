@@ -4,7 +4,7 @@ class Profile::LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = ::Location.all
+    @locations = current_user.locations.where(deleted: false)
   end
 
   # GET /locations/1
@@ -53,9 +53,10 @@ class Profile::LocationsController < ApplicationController
   # DELETE /locations/1
   # DELETE /locations/1.json
   def destroy
-    @location.destroy
+    authorize @location
+    @location.update_attribute(:deleted, true)
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to profile_locations_path, notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
