@@ -53,9 +53,10 @@ class Profile::LocationsController < ApplicationController
   # DELETE /locations/1
   # DELETE /locations/1.json
   def destroy
-    @location.destroy
+    authorize @location
+    @location.update_attribute(:deleted, true)
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to [:profile, @location], notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
