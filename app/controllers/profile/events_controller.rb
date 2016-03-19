@@ -5,7 +5,7 @@ class Profile::EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = ::Event.all
+    @events = current_user.events.where(deleted: false)
   end
 
   # GET /events/1
@@ -15,7 +15,7 @@ class Profile::EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new
+    @event = ::Event.new
   end
 
   # GET /events/1/edit
