@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
 	validates :name, presence: true
 	validates :start_time, presence: true
 	validates :description, presence: true
-	validates :location, presence: true
-	validates :date, presence: true
+	validates :location_id, presence: true
+	validates :breminale_date_id, presence: true
 	validates :user, presence: true
 end
