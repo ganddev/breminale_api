@@ -4,7 +4,7 @@ class Profile::LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = ::Location.all
+    @locations = current_user.locations.where(deleted: false)
   end
 
   # GET /locations/1
