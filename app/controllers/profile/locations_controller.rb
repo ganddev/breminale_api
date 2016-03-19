@@ -56,7 +56,7 @@ class Profile::LocationsController < ApplicationController
     authorize @location
     @location.update_attribute(:deleted, true)
     respond_to do |format|
-      format.html { redirect_to [:profile, @location], notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to profile_locations_path, notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
