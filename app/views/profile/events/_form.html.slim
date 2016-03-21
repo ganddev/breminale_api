@@ -1,9 +1,16 @@
-= bootstrap_form_for([:profile, @event], multipart: true) do |f|
-  javascript:
+script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"
+javascript:
     SC.initialize({
       client_id: '469443570702bcc59666de5950139327',
       redirect_uri: 'http://example.com/callback'
     });
+    document.ready(
+      SC.get("/resolve/?url=https://soundcloud.com/dogwill", {limit: 1}, function(result){
+        console.log(result);
+      });
+    ));
+
+= bootstrap_form_for([:profile, @event], multipart: true) do |f|
   .row
     .col-xs-12.col-md-6
       = f.text_field :name, label: "Name"
