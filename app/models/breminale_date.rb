@@ -4,11 +4,11 @@ class BreminaleDate < ActiveRecord::Base
   validates :datetime, presence: true
   validates :user, presence: true
 
-  def isAllowedToEditBreminaleDate?(user)
-		if self.user.id == user.id
-			true
-		else
-			false
-		end		
-	end	
+
+  def self.values
+		::BreminaleDate.all.map do |breminaleDate|
+			[breminaleDate.datetime, breminaleDate.id]
+		end
+	end
+
 end

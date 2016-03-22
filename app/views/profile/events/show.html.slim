@@ -1,0 +1,21 @@
+.row
+  .col-xs-12
+    .row
+      .col-xs-12.col-lg-6
+        .thumbnail
+          - if @event.image_url
+            = image_tag @event.image.url
+      .col-xs-12.col-lg-6
+        .list-group
+          .list-group-item
+            p.text-muted Name
+            h4= @event.name
+            
+          .list-group-item
+            p.text-muted Beschreibung
+            h4= @event.description
+            
+        
+        
+= link_to 'Editieren', edit_profile_event_path(@event)
+= link_to 'Zurück', profile_events_path

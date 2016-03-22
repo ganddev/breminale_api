@@ -1,0 +1,29 @@
+.row
+  .col-xs-12
+    table.table.table-hover.table-responsive
+      thead
+        tr
+          th #
+          th Name
+          th Beschreibung
+          th Latitude
+          th Longitude
+          th Optionen
+      tbody
+        - @locations.each do |location|
+          tr
+            td= location.id
+            td= location.name
+            td= location.description
+            td= location.latitude
+            td= location.longitude
+            td
+              - if policy(location).update?
+                 =link_to edit_profile_location_path(location)
+                  span.glyphicon.glyphicon-pencil
+              - if policy(location).destroy?
+                 =link_to profile_location_path(location), :method => :delete do
+                  span.glyphicon.glyphicon-trash
+
+
+= link_to 'Neue Location', new_profile_location_path

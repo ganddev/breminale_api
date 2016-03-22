@@ -3,15 +3,16 @@ module Dates
 		resource :dates do
 			desc "list all dates"
 			get do
-				BreminaleDates.all
+				dates = ::BreminaleDate.all
+				present dates, with: Entities::BreminaleDateEntity
 			end
-
 			desc "Return on date object"
 			params do
 				requires :id, type: Integer, desc: "Desc of the date"
 			end
 			get ':id' do
-				BreminaleDates.find_by_id(params[:id])
+				date = ::BreminaleDate.find_by_id!(params[:id])
+				present date, with: Entities::BreminaleDateEntity
 			end
 		end
 	end

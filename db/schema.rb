@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115144014) do
+ActiveRecord::Schema.define(version: 20160225195630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "breminale_dates", force: :cascade do |t|
-    t.datetime "my_date"
+    t.datetime "date_day"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,13 +35,17 @@ ActiveRecord::Schema.define(version: 20160115144014) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.string   "desc"
+    t.string   "description"
     t.string   "image_url"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "user_id"
     t.integer  "location_id"
     t.integer  "breminale_date_id"
+    t.boolean  "deleted",           default: false
+    t.date     "start_time"
+    t.string   "soundcloud_url"
+    t.string   "String"
   end
 
   add_index "events", ["breminale_date_id"], name: "index_events_on_breminale_date_id", using: :btree
@@ -55,7 +59,7 @@ ActiveRecord::Schema.define(version: 20160115144014) do
     t.decimal  "longitude"
     t.boolean  "deleted"
     t.integer  "user_id"
-    t.string   "image"
+    t.string   "image_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -64,11 +68,24 @@ ActiveRecord::Schema.define(version: 20160115144014) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "auth_token"
     t.string   "password_digest"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "breminale_dates", "users"
   add_foreign_key "events", "breminale_dates"

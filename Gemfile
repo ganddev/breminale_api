@@ -30,10 +30,21 @@ gem 'grape-swagger'
 gem 'sorcery'
 gem 'jwt'
 
+gem 'slim'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap_form'
+gem 'devise'
+
+#s3
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'aws-sdk', '~> 2'
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'rpush'
+
+gem "pundit"
 
 #Authorization
 gem 'cancancan', '~> 1.10'
