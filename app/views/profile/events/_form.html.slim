@@ -1,16 +1,27 @@
 javascript:
-  $( document ).ready(function() {
-    SC.initialize({
-      client_id: '469443570702bcc59666de5950139327'
-    });
-    SC.resolve('https://soundcloud.com/revealed-recordings').then(function(result){
-      SC.get('/users/'+result["id"]+'/tracks').then(function(tracks){
-        console.log(tracks)
-      });
-    }).catch(function(error){
-      alert('Error: ' + error.message);
+  $(document).ready(function(){
+    $('#soundcloud').on('focusout',function() {
+      var soundcloudurl = $('#soundcloud').val();
+      if(soundcloudurl.length > 1) {
+        $('#spinner').css('display','inline');
+        SC.initialize({
+          client_id: '469443570702bcc59666de5950139327'
+        });
+        SC.resolve(soundcloudurl).then(function(result){
+          $('#spinner').css('display','none');
+          console.log(result["id"])
+        }).catch(function(error){
+          $('#spinner').css('display','none');
+        });
+      }
     });
   });
+
+figure id="spinner" style="display: hidden;"
+  div class="dot four"
+  div class="dot three"
+  div class="dot two"
+  div class="dot one"
 
 = bootstrap_form_for([:profile, @event], multipart: true) do |f|
   .row
@@ -33,7 +44,7 @@ javascript:
       = f.time_field :start_time, label: "Startzeit"
   .row
     .col-xs-12.col-md-6
-     = f.text_field :soundcloud_url, label: "Soundcloud URL"
+     = f.text_field :soundcloud_url, label: "Soundcloud URL", id: "soundcloud"
 
 
   .row
