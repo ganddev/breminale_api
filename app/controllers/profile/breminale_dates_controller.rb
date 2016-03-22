@@ -5,7 +5,7 @@ class Profile::BreminaleDatesController < ApplicationController
   # GET /breminale_dates
   # GET /breminale_dates.json
   def index
-    @breminale_dates = ::BreminaleDate.all
+    @breminale_dates = current_user.breminale_dates.all
   end
 
   # GET /breminale_dates/1
@@ -29,7 +29,7 @@ class Profile::BreminaleDatesController < ApplicationController
 
     respond_to do |format|
       if @breminale_date.save
-        format.html { redirect_to @breminale_date, notice: 'Breminale date was successfully created.' }
+        format.html { redirect_to [:profile, @breminale_date], notice: 'Datum erfolgreich angelegt' }
         format.json { render :show, status: :created, location: @breminale_date }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Profile::BreminaleDatesController < ApplicationController
   def update
     respond_to do |format|
       if @breminale_date.update(breminale_date_params)
-        format.html { redirect_to @breminale_date, notice: 'Breminale date was successfully updated.' }
+        format.html { redirect_to [:profile, @breminale_date], notice: 'Datum erfolgreich geändert' }
         format.json { render :show, status: :ok, location: @breminale_date }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class Profile::BreminaleDatesController < ApplicationController
   def destroy
     @breminale_date.destroy
     respond_to do |format|
-      format.html { redirect_to breminale_dates_url, notice: 'Breminale date was successfully destroyed.' }
+      format.html { redirect_to breminale_dates_url, notice: 'Datum erfolgreich gelöscht' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +70,6 @@ class Profile::BreminaleDatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def breminale_date_params
-      params[:breminale_date]
+      params.require(:breminale_date).permit(:date_day)
     end
 end

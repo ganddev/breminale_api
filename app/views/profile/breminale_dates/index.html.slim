@@ -1,0 +1,22 @@
+.row
+  .col-xs-12
+    table.table.table-hover.table-responsive
+      thead
+        tr
+          th #
+          th Datum
+      tbody
+        - @breminale_dates.each do |breminale_date|
+          tr
+            td= breminale_date.id
+            td= breminale_date.date_day.strftime("%d.%m.%Y") 
+            td
+              - if policy(breminale_date).update?
+                 =link_to edit_profile_breminale_date_path(breminale_date)
+                  span.glyphicon.glyphicon-pencil
+              - if policy(breminale_date).destroy?
+                 =link_to profile_breminale_date_path(breminale_date), :method => :delete do
+                  span.glyphicon.glyphicon-trash
+
+
+= link_to 'Neues Datum', new_profile_breminale_date_path
