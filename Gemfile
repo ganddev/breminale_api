@@ -46,6 +46,8 @@ gem 'rpush'
 
 gem "pundit"
 
+gem 'puma'
+
 #Authorization
 gem 'cancancan', '~> 1.10'
 
