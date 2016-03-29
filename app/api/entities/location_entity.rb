@@ -7,5 +7,13 @@ module Entities
 		expose :image_url, documentation: {type: "String", desc: "An image of the location"}
 		expose :description, documentation: {type: "String", desc: "Description for the location"}
 		expose :deleted, documentation: {type: "Boolean", desc: "Is the location delted or not"}
+
+		def latitude
+    		object.latitude.to_f
+  		end
+
+  		def longitude
+  			object.longitude.to_f
+  		end
 	end
 end
