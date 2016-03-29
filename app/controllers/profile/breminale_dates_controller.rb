@@ -42,6 +42,7 @@ class Profile::BreminaleDatesController < ApplicationController
   # PATCH/PUT /breminale_dates/1.json
   def update
     respond_to do |format|
+      authorize @breminale_date
       if @breminale_date.update(breminale_date_params)
         format.html { redirect_to [:profile, @breminale_date], notice: 'Datum erfolgreich geändert' }
         format.json { render :show, status: :ok, location: @breminale_date }
@@ -55,6 +56,7 @@ class Profile::BreminaleDatesController < ApplicationController
   # DELETE /breminale_dates/1
   # DELETE /breminale_dates/1.json
   def destroy
+    authorize @breminale_date
     @breminale_date.destroy
     respond_to do |format|
       format.html { redirect_to profile_breminale_dates_path, notice: 'Datum erfolgreich gelöscht' }
