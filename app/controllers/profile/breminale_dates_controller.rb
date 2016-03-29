@@ -57,7 +57,7 @@ class Profile::BreminaleDatesController < ApplicationController
   def destroy
     @breminale_date.destroy
     respond_to do |format|
-      format.html { redirect_to breminale_dates_url, notice: 'Datum erfolgreich gelöscht' }
+      format.html { redirect_to profile_breminale_dates_path, notice: 'Datum erfolgreich gelöscht' }
       format.json { head :no_content }
     end
   end
