@@ -1,9 +1,9 @@
-class LocationPolicy
-  attr_reader :user, :location
+class BreminaleDatePolicy
+  attr_reader :user, :breminale_date
 
-  def initialize(user, location)
+  def initialize(user, breminale_date)
     @user = user
-    @location = location
+    @breminale_date = breminale_date
   end
 
   def index?
@@ -11,7 +11,7 @@ class LocationPolicy
   end
 
   def show?
-    @user == @location.user
+    @user == @breminale_date.user
   end
 
   def create?
@@ -23,7 +23,7 @@ class LocationPolicy
   end
 
   def update?
-    @user == @location.user
+    @user == @breminale_date.user
   end
 
   def edit?
@@ -31,7 +31,7 @@ class LocationPolicy
   end
 
   def destroy?
-    @user == @location.user
+    @user == @breminale_date.user
   end
 
   def scope

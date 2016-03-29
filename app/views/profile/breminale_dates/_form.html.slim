@@ -1,0 +1,6 @@
+= bootstrap_form_for([:profile, @breminale_date], multipart: true) do |f|
+  .row
+    .col-xs-12.col-md-6
+      = f.date_field :date_day, label: "Datum"
+
+  = f.primary "Speichern"

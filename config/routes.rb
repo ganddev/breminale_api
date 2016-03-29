@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :profile do
     resources :events
     resources :locations
+    resources :breminale_dates
   end
 
   root 'welcome#index'
