@@ -26,7 +26,6 @@ class Profile::BreminaleDatesController < ApplicationController
   # POST /breminale_dates.json
   def create
     @breminale_date = current_user.breminale_dates.new(breminale_date_params)
-
     respond_to do |format|
       if @breminale_date.save
         format.html { redirect_to [:profile, @breminale_date], notice: 'Datum erfolgreich angelegt' }
