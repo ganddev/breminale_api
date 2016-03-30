@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225195630) do
+ActiveRecord::Schema.define(version: 20160329204249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 20160225195630) do
   end
 
   add_index "breminale_dates", ["user_id"], name: "index_breminale_dates_on_user_id", using: :btree
+
+  create_table "devices", force: :cascade do |t|
+    t.string   "device_token"
+    t.string   "device_type"
+    t.string   "device_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "emp_data", force: :cascade do |t|
     t.string   "name"
