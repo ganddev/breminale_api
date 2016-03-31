@@ -40,4 +40,18 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Paperclip config:
+  Paperclip.options[:image_magick_path] = "/opt/ImageMagick/bin"
+  Paperclip.options[:command_path] = "/opt/ImageMagick/bin"
+  #configuration for aws s3
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :s3_region => ENV['AWS_REGION'],
+      :bucket => ENV['S3_BUCKET'],
+      :access_key_id => ENV['AWS_ACCESS_KEY'],
+      :secret_access_key => ENV['AWS_SECRET_KEY']
+    }
+  }
 end
