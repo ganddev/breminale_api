@@ -8,8 +8,9 @@ module Devices
 				optional :device_id, type: String, desc: "Only necessary for android"
 			end
 			post do
-				device = ::Device.where(:device_id => params[:device_token]).first_or_create!(params)
-				device.update_attribute(:device_token => params[:device_token])
+				device = ::Device.where(:device_id => params[:device_token]).first_or_create(params)
+				device.update_attribute(:device_token, params[:device_token])
+				present device, with:  Entities::DeviceEntity
 			end	
 		end
 	end	
