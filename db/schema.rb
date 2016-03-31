@@ -11,19 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329204249) do
+ActiveRecord::Schema.define(version: 20160331184915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "breminale_dates", force: :cascade do |t|
-    t.datetime "date_day"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "breminale_dates", ["user_id"], name: "index_breminale_dates_on_user_id", using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.string   "device_token"
@@ -33,30 +24,19 @@ ActiveRecord::Schema.define(version: 20160329204249) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "emp_data", force: :cascade do |t|
-    t.string   "name"
-    t.string   "address"
-    t.integer  "age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "image_url"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "user_id"
     t.integer  "location_id"
-    t.integer  "breminale_date_id"
-    t.boolean  "deleted",           default: false
-    t.date     "start_time"
+    t.boolean  "deleted",        default: false
+    t.datetime "start_time"
     t.string   "soundcloud_url"
-    t.string   "String"
   end
 
-  add_index "events", ["breminale_date_id"], name: "index_events_on_breminale_date_id", using: :btree
   add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
@@ -95,8 +75,6 @@ ActiveRecord::Schema.define(version: 20160329204249) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "breminale_dates", "users"
-  add_foreign_key "events", "breminale_dates"
   add_foreign_key "events", "locations"
   add_foreign_key "events", "users"
   add_foreign_key "locations", "users"
