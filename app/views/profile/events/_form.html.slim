@@ -34,11 +34,6 @@ figure id="spinner" style="display: hidden;"
   .row
     .col-xs-12.col-md-6
      = f.select :location_id, options_for_select(Location.values, @event.location_id), { label: "Location" }
-
-  .row
-    .col-xs-12.col-md-6
-     = f.select :breminale_date_id, options_for_select(BreminaleDate.values, @event.breminale_date_id), { label: "Tag" }
-
   .row
     .col-xs-12.col-md-6 
       = f.time_field :start_time, label: "Startzeit"
