@@ -16,9 +16,6 @@ class API < Grape::API
       error!({status: e.status,message: e.message,errors: e.errors}, e.status)
   end
 
-  helpers SessionHelpers
-  
-  mount Dates::Data
   mount Events::Data
   mount Locations::Data
   mount Devices::Data
