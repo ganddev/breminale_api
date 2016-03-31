@@ -1,7 +1,13 @@
 module Devices
 	class Data < Grape::API
 		resource :devices do
-			desc "creates a new device"
+			desc "Creates a new device" do
+				success Entities::DeviceEntity
+				headers XAuthToken: {
+            			description: 'Validates your identity',
+            			required: true
+        				}
+      end
 			params do
 				requires :device_token, type: String, desc: "Device token of APNS or GCM"
 				requires :device_type, type: String, desc: "Is it a ios or android device",default: 'android', values: ['android', 'ios']
