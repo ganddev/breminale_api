@@ -36,7 +36,7 @@ figure id="spinner" style="display: hidden;"
      = f.select :location_id, options_for_select(Location.values, @event.location_id), { label: "Location" }
   .row
     .col-xs-12.col-md-6 
-      = f.time_field :start_time, label: "Startzeit"
+      = f.datetime_local_field :start_time, label: "Startzeit"
   .row
     .col-xs-12.col-md-6
      = f.text_field :soundcloud_url, label: "Soundcloud URL", id: "soundcloud"

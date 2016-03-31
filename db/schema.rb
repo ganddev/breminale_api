@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331182341) do
+ActiveRecord::Schema.define(version: 20160331184915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160331182341) do
     t.integer  "user_id"
     t.integer  "location_id"
     t.boolean  "deleted",        default: false
-    t.date     "start_time"
+    t.datetime "start_time"
     t.string   "soundcloud_url"
   end
 

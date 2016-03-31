@@ -25,7 +25,9 @@ class Profile::EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    byebug
     @event = current_user.events.create(event_params)
+    byebug
     respond_to do |format|
       if @event.save
         format.html { redirect_to [:profile, @event], notice: 'Event was successfully created.' }
@@ -69,6 +71,6 @@ class Profile::EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description,:location_id,:breminale_date_id,:deleted,:image)
+      params.require(:event).permit(:name, :description,:location_id,:start_time,:soundcloud_url,:deleted,:image)
     end
 end

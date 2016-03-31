@@ -4,7 +4,7 @@
       .col-xs-12.col-lg-6
         .thumbnail
           - if @event.image_url
-            = image_tag @event.image.url
+            = image_tag @event.image_url
       .col-xs-12.col-lg-6
         .list-group
           .list-group-item
@@ -14,6 +14,12 @@
           .list-group-item
             p.text-muted Beschreibung
             h4= @event.description
+          .list-group-item
+            p.text-muted Location
+            h4 = @event.location.name
+          .list-group-item
+            p.text-muted Startzeit
+            h4 = @event.start_time
             
         
         
