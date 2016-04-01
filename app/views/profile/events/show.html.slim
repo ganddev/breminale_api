@@ -3,8 +3,8 @@
     .row
       .col-xs-12.col-lg-6
         .thumbnail
-          - if @event.image_url
-            = image_tag @event.image_url
+          - if @event.image.url
+            = image_tag @event.image.url
       .col-xs-12.col-lg-6
         .list-group
           .list-group-item
