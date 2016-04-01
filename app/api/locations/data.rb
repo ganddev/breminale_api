@@ -1,7 +1,9 @@
 module Locations
 	class Data < Grape::API
 		resource :locations do 
-			desc "List all locations"
+			desc "List all locations" do
+				success Entities::LocationEntity
+			end
 			get do
 				locations = ::Location.all
 				present locations, with: Entities::LocationEntity
