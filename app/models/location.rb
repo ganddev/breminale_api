@@ -12,6 +12,9 @@ class Location < ActiveRecord::Base
 	validates :latitude, presence: true
 	validates :longitude, presence: true
 	validates :user, presence: true
+	validates :image,
+	attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
+  attachment_size: { less_than: 1.megabytes }
 
 	after_initialize :init
 
