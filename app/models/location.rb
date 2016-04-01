@@ -1,10 +1,10 @@
 class Location < ActiveRecord::Base
 	
-	has_attached_file :image_url, styles: {
+	has_attached_file :image, styles: {
     	thumb: '100x100>',
     	square: '200x200#',
     	medium: '300x300>'
-  	}
+  }
 
 	belongs_to :user
 	has_many :events, dependent: :destroy
@@ -24,12 +24,4 @@ class Location < ActiveRecord::Base
 			[location.name, location.id]
 		end
 	end
-
-	def isAllowedToEditLocation?(user)
-		if self.user.id == user.id
-			true
-		else
-			false
-		end		
-	end	
 end
