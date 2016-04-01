@@ -1,10 +1,10 @@
 class Location < ActiveRecord::Base
 	
-	has_attached_file :image_url, styles: {
+	has_attached_file :image, styles: {
     	thumb: '100x100>',
     	square: '200x200#',
     	medium: '300x300>'
-  	}
+  }
 
 	belongs_to :user
 	has_many :events, dependent: :destroy
@@ -12,6 +12,9 @@ class Location < ActiveRecord::Base
 	validates :latitude, presence: true
 	validates :longitude, presence: true
 	validates :user, presence: true
+	validates :image,
+	attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
+  attachment_size: { less_than: 1.megabytes }
 
 	after_initialize :init
 
@@ -24,12 +27,4 @@ class Location < ActiveRecord::Base
 			[location.name, location.id]
 		end
 	end
-
-	def isAllowedToEditLocation?(user)
-		if self.user.id == user.id
-			true
-		else
-			false
-		end		
-	end	
 end

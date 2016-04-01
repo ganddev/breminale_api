@@ -25,9 +25,7 @@ class Profile::EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    byebug
     @event = current_user.events.create(event_params)
-    byebug
     respond_to do |format|
       if @event.save
         format.html { redirect_to [:profile, @event], notice: 'Event was successfully created.' }
