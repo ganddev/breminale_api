@@ -7,6 +7,7 @@
           th Name
           th Beschreibung
           th Location
+          th Optionen
       tbody
         - @events.each do |event|
           tr
@@ -14,6 +15,12 @@
             td= event.name
             td= event.description
             td= event.location.name
+            td= - if policy(event).update?
+                 =link_to edit_profile_event_path(event)
+                  span.glyphicon.glyphicon-pencil
+              - if policy(event).destroy?
+                 =link_to profile_event_path(location), :method => :delete do
+                  span.glyphicon.glyphicon-trash
             
 = link_to 'Neues Event', new_profile_event_path
 

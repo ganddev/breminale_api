@@ -1,21 +1,21 @@
 javascript:
-  $(document).ready(function(){
-    $('#soundcloud').on('focusout',function() {
-      var soundcloudurl = $('#soundcloud').val();
-      if(soundcloudurl.length > 1) {
-        $('#spinner').css('display','inline');
-        SC.initialize({
-          client_id: '469443570702bcc59666de5950139327'
-        });
-        SC.resolve(soundcloudurl).then(function(result){
-          $('#spinner').css('display','none');
-          console.log(result["id"])
-        }).catch(function(error){
-          $('#spinner').css('display','none');
-        });
-      }
-    });
-  });
+  function retrievSoundcloudUserId(e){
+    e.preventDefault();
+    console.log("call soundcloud")
+    var soundcloudurl = $('#soundcloud').val();
+    if(soundcloudurl.length > 1) {
+      $('#spinner').css('display','inline');
+      SC.initialize({
+        client_id: '469443570702bcc59666de5950139327'
+      });
+      SC.resolve(soundcloudurl).then(function(result){
+        $('#spinner').css('display','none');
+        console.log(result["id"])
+      }).catch(function(error){
+        $('#spinner').css('display','none');
+      });
+    }
+  }
 
 figure id="spinner" style="display: hidden;"
   div class="dot four"
@@ -47,4 +47,4 @@ figure id="spinner" style="display: hidden;"
       = f.file_field :image, label: "Bild"
   
       
-  = f.primary "Save"
+  = f.submit "Save"
