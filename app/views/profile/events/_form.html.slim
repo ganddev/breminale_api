@@ -15,6 +15,7 @@ javascript:
     $('#submit_form_id').submit(function() {
       $(this).unbind('submit').ajaxSubmit({
         success: function(data) {
+          console.log("success submit");
           //do something on success case.
         }
       })
