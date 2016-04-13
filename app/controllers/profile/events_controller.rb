@@ -70,6 +70,6 @@ class Profile::EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description,:location_id,:start_time,:soundcloud_url,:deleted,:image)
+      params.require(:event).permit(:name, :description,:location_id,:start_time,:soundcloud_url,:soundcloud_user_id,:deleted,:image)
     end
 end

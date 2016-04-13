@@ -7,20 +7,15 @@ javascript:
       });
       SC.resolve(soundcloudurl).then(function(result){
         $('#spinner').css('display','none');
-        console.log(result["id"])
+        $('#event_soundcloud_user_id').val(result["id"]);
+        $('#submit_form_id').submit();
       }).catch(function(error){
-        $('#spinner').css('display','none');
+        alert('Soundcloud URL konnte nicht auf gelöst werden!');
+        $('#event_soundcloud_user_id').val("");
+        $('#submit_form_id').submit();
       });
     }
-    $('#submit_form_id').submit(function() {
-      $(this).unbind('submit').ajaxSubmit({
-        success: function(data) {
-          console.log("success submit");
-          //do something on success case.
-        }
-      })
-      return false
-    });
+   
   }
 
 figure id="spinner" style="display: hidden;"
@@ -29,7 +24,7 @@ figure id="spinner" style="display: hidden;"
   div class="dot two"
   div class="dot one"
 
-= bootstrap_form_for([:profile, @event], multipart: true, :remote => true, :html => {:id => "submit_form_id",:onsubmit => "return false;", :name => 'form'}) do |f|
+= bootstrap_form_for([:profile, @event], multipart: true, :html => {:id => "submit_form_id", :name => 'form'}) do |f|
   .row
     .col-xs-12.col-md-6
       = f.text_field :name, label: "Name"
@@ -46,11 +41,11 @@ figure id="spinner" style="display: hidden;"
   .row
     .col-xs-12.col-md-6
      = f.text_field :soundcloud_url, label: "Soundcloud URL", id: "soundcloud"
-
+    = f.hidden_field :soundcloud_user_id
 
   .row
     .col-xs-12.col-md-6
       = f.file_field :image, label: "Bild"
   
       
-  = f.primary "Save", id: "submit_form_btn", onclick: "retriveSoundcloudUserId($('#soundcloud').val());".html_safe
+  = f.button "Save", id: "submit_form_btn", onclick: "retriveSoundcloudUserId($('#soundcloud').val());".html_safe
