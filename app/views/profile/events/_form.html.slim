@@ -1,21 +1,23 @@
 javascript:
-  $(document).ready(function(){
-    $('#soundcloud').on('focusout',function() {
-      var soundcloudurl = $('#soundcloud').val();
-      if(soundcloudurl.length > 1) {
-        $('#spinner').css('display','inline');
-        SC.initialize({
-          client_id: '469443570702bcc59666de5950139327'
-        });
-        SC.resolve(soundcloudurl).then(function(result){
-          $('#spinner').css('display','none');
-          console.log(result["id"])
-        }).catch(function(error){
-          $('#spinner').css('display','none');
-        });
-      }
-    });
-  });
+  function retriveSoundcloudUserId(soundcloudurl) {
+    if(soundcloudurl.length > 1) {
+      $('#spinner').css('display','inline');
+      SC.initialize({
+        client_id: '469443570702bcc59666de5950139327'
+      });
+      SC.resolve(soundcloudurl).then(function(result){
+        $('#spinner').css('display','none');
+        $('#event_soundcloud_user_id').val(result["id"]);
+        $('#submit_form_id').submit();
+      }).catch(function(error){
+        alert('Soundcloud URL konnte nicht auf gelöst werden!');
+        $('#submit_form_id').submit();
+      });
+    } else {
+      $('#submit_form_id').submit();
+    }
+   
+  }
 
 figure id="spinner" style="display: hidden;"
   div class="dot four"
@@ -23,7 +25,7 @@ figure id="spinner" style="display: hidden;"
   div class="dot two"
   div class="dot one"
 
-= bootstrap_form_for([:profile, @event], multipart: true) do |f|
+= bootstrap_form_for([:profile, @event], multipart: true, :html => {:id => "submit_form_id", :name => 'form'}) do |f|
   .row
     .col-xs-12.col-md-6
       = f.text_field :name, label: "Name"
@@ -40,11 +42,11 @@ figure id="spinner" style="display: hidden;"
   .row
     .col-xs-12.col-md-6
      = f.text_field :soundcloud_url, label: "Soundcloud URL", id: "soundcloud"
-
+    = f.hidden_field :soundcloud_user_id
 
   .row
     .col-xs-12.col-md-6
       = f.file_field :image, label: "Bild"
   
       
-  = f.primary "Save"
+  = f.button "Save", id: "submit_form_btn", onclick: "retriveSoundcloudUserId($('#soundcloud').val());".html_safe

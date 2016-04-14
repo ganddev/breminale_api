@@ -54,9 +54,10 @@ class Profile::EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event.destroy
+    authorize @event
+    @event.update_attribute(:deleted, true)
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to  profile_events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +70,6 @@ class Profile::EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description,:location_id,:start_time,:soundcloud_url,:deleted,:image)
+      params.require(:event).permit(:name, :description,:location_id,:start_time,:soundcloud_url,:soundcloud_user_id,:deleted,:image)
     end
 end
