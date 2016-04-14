@@ -15,6 +15,7 @@ module Entities
 		end
 		expose :start_time, documentation: {type: "String", desc: "The start time of the event"}
 		expose :soundcloud_url, documentation: {type: "String", desc: "Url to the soundcloud profile"}
+		expose :soundcloud_user_id, documentation: {type: "String", desc: "User id of the soundcloud user"}
 		expose :deleted, documentation: {type: "Boolean", desc: "Is the event deleted or not"}
 		expose :created_at
 		expose :updated_at
