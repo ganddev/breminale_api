@@ -11,9 +11,10 @@ javascript:
         $('#submit_form_id').submit();
       }).catch(function(error){
         alert('Soundcloud URL konnte nicht auf gelöst werden!');
-        $('#event_soundcloud_user_id').val("");
         $('#submit_form_id').submit();
       });
+    } else {
+      $('#submit_form_id').submit();
     }
    
   }
