@@ -11,7 +11,6 @@ module Devices
 			params do
 				requires :device_token, type: String, desc: "Device token of APNS or GCM"
 				requires :device_type, type: String, desc: "Is it a ios or android device",default: 'android', values: ['android', 'ios']
-				optional :device_id, type: String, desc: "Only necessary for android"
 			end
 			post do
 				error!('Unauthorized', 401) unless headers['Xauthtoken'] == ENV['API_AUTHTOKEN']
