@@ -42,6 +42,9 @@ gem 'aws-sdk', '~> 2'
 
 gem 'hashie-forbidden_attributes'
 
+
+gem 'dotenv-rails', :groups => [:development, :test]
+
 # Use ActiveModel has_secure_password
 #gem 'bcrypt', '~> 3.1.7'
 
