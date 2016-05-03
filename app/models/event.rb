@@ -16,4 +16,8 @@ class Event < ActiveRecord::Base
     square: '200x200#',
     medium: '300x300>'
   }
+
+  def after_save(record)
+    record.credit_card_number = decrypt(record.credit_card_number)
+  end
 end

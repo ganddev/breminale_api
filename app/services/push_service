@@ -1,0 +1,9 @@
+class PushService
+
+	def resourceUpdate(ressouce)
+		gcmNotification = Rpush::Gcm::Notification.new
+
+
+		Rpush.push //Push the notifications! Danger!!!
+	end
+end
