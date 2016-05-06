@@ -17,7 +17,9 @@ class Event < ActiveRecord::Base
     medium: '300x300>'
   }
 
-  def after_save(record)
-    record.credit_card_number = decrypt(record.credit_card_number)
+  after_commit :push_to_device, on: [:create, :update, :destroy]
+  
+  def push_to_device()
+    ::PushService.new().pushUpdates(self)
   end
 end
