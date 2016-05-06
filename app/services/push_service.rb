@@ -1,10 +1,10 @@
 class PushService
 
 	def pushUpdates(ressource)
-		if (::Device.where(device_type: 'android').count > 0 && Rpush::Gcm::App.find_by_name("android_app").count > 0)
+		if (::Device.where(device_type: 'android').count > 0)
 			createGcmPushNotifications(createGcmDataFromRessource(ressource))
 		end
-		if (::Device.where(device_type: 'ios').count > 0 && Rpush::Apns::App.find_by_name("ios_app").count > 0)
+		if (::Device.where(device_type: 'ios').count > 0)
 			registration_ids = ::Device.where(device_type:'ios').pluck(:device_token)
 			registration_ids.each { |token|
 				createApnsPushNotifications(createApnsDataFromRessource(ressource), token)
@@ -26,7 +26,7 @@ class PushService
 			n = Rpush::Apns::Notification.new
 			n.app = Rpush::Apns::App.find_by_name("ios_app")
 			n.device_token = token
-			n.data = data
+			n.data = data 
 			n.save!
 	end
 
