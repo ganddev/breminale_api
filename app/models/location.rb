@@ -4,7 +4,8 @@ class Location < ActiveRecord::Base
     	thumb: '100x100>',
     	square: '200x200#',
     	medium: '300x300>'
-  }
+  },
+  :default_url => ""
 
 	belongs_to :user
 	has_many :events, dependent: :destroy
@@ -12,7 +13,7 @@ class Location < ActiveRecord::Base
 	validates :latitude, presence: true
 	validates :longitude, presence: true
 	validates :user, presence: true
-	validates :image,
+	validates :image, presence: true,
 	attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
   attachment_size: { less_than: 1.megabytes }
 

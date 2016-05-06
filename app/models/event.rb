@@ -11,11 +11,8 @@ class Event < ActiveRecord::Base
     attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
     attachment_size: { less_than: 5.megabytes }
 
-  has_attached_file :image, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
-  }
+  has_attached_file :image,
+  :default_url => ""
 
   after_commit :push_to_device, on: [:create, :update, :destroy]
   
