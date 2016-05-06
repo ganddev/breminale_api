@@ -16,4 +16,10 @@ class Event < ActiveRecord::Base
     square: '200x200#',
     medium: '300x300>'
   }
+
+  after_commit :push_to_device, on: [:create, :update, :destroy]
+  
+  def push_to_device()
+    ::PushService.new().pushUpdates(self)
+  end
 end

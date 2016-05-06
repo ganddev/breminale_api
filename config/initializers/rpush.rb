@@ -101,7 +101,7 @@ Rpush.reflect do |on|
   # Called when the GCM returns a failure that indicates an invalid registration id.
   # You will need to delete the registration_id from your records.
   on.gcm_invalid_registration_id do |app, error, registration_id|
-    d = ::Device.find_by_device_token(old_id)
+    d = ::Device.find_by_device_token(registration_id)
     d.destroy
   end
 

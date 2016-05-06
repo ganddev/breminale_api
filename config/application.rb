@@ -21,9 +21,9 @@ module BreminaleRails
     # config.i18n.default_locale = :de
 
    ## Newly Added code to set up the api code
-    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app','api','*')]
     config.autoload_paths += Dir["#{config.root}/app/models/**/"]
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
 
     config.middleware.use Rack::Cors do
         allow do
