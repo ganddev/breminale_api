@@ -20,6 +20,9 @@ module BreminaleRails
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.time_zone = 'Berlin'
+    config.active_record.default_timezone = :local
+
    ## Newly Added code to set up the api code
     config.autoload_paths += Dir[Rails.root.join('app','api','*')]
     config.autoload_paths += Dir["#{config.root}/app/models/**/"]
