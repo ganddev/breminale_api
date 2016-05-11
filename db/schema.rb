@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426132757) do
+ActiveRecord::Schema.define(version: 20160511173454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 20160426132757) do
   end
 
   add_index "locations", ["user_id"], name: "index_locations_on_user_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "rpush_apps", force: :cascade do |t|
     t.string   "name",                                null: false
@@ -144,4 +153,5 @@ ActiveRecord::Schema.define(version: 20160426132757) do
   add_foreign_key "events", "locations"
   add_foreign_key "events", "users"
   add_foreign_key "locations", "users"
+  add_foreign_key "messages", "users"
 end

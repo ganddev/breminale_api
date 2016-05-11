@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   namespace :profile do
     resources :events
     resources :locations
-    end
+    resources :messages
+  end
 
   root 'welcome#index'
   

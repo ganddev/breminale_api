@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 	has_many :locations, dependent: :destroy
 	has_many :events, dependent: :destroy
+	has_many :messages, dependent: :destroy
 
 	validates :email, presence: true, uniqueness: true
 	validates :password, presence: true
