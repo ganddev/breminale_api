@@ -1,12 +1,10 @@
 javascript:
   function retriveSoundcloudUserId(soundcloudurl) {
     if(soundcloudurl.length > 1) {
-      $('#spinner').css('display','inline');
       SC.initialize({
         client_id: '469443570702bcc59666de5950139327'
       });
       SC.resolve(soundcloudurl).then(function(result){
-        $('#spinner').css('display','none');
         $('#event_soundcloud_user_id').val(result["id"]);
         $('#submit_form_id').submit();
       }).catch(function(error){
@@ -16,14 +14,7 @@ javascript:
     } else {
       $('#submit_form_id').submit();
     }
-   
   }
-
-figure id="spinner" style="display: hidden;"
-  div class="dot four"
-  div class="dot three"
-  div class="dot two"
-  div class="dot one"
 
 = bootstrap_form_for([:profile, @event], multipart: true, :html => {:id => "submit_form_id", :name => 'form'}) do |f|
   .row
