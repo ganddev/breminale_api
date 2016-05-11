@@ -19,6 +19,7 @@ class API < Grape::API
   mount Events::Data
   mount Locations::Data
   mount Devices::Data
+  mount Messages::Data
   	
   add_swagger_documentation(
         api_version: "v1",

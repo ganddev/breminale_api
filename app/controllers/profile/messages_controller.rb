@@ -24,7 +24,7 @@ class Profile::MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message = current_user.messages.create(message_params)
 
     respond_to do |format|
       if @message.save
@@ -64,7 +64,7 @@ class Profile::MessagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params[:id])
+      @message = ::Message.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

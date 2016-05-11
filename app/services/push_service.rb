@@ -13,6 +13,27 @@ class PushService
 		Rpush.push #Push the notifications! Danger!!!
 	end
 
+	def pushMessage(message)
+		if(::Device.where(device_type: 'android').count > 0)
+			createGcmPushNotifications(createGcmDataFromMessage(message))
+		end
+
+		if(::Device.where(device_type: 'ios').count > 0)
+			registration_ids = ::Device.where(device_type:'ios').pluck(:device_token)
+			registration_ids.each { |token|
+				createApnsPushNotifications(createApnsDataFromMessage(ressource), token)
+			}
+		end
+		Rpush.push #Push the notifications! Danger!!!
+	end
+
+	def createGcmDataFromMessage(message)
+		data = { :identifier => message.id, :ressource_type => message.class.name.split('::').last.downcase, :message => message.message}
+	end
+
+	def createApnsDataFromMessage(message)
+		data = { :identifier => message.id, :ressource_type => message.class.name.split('::').last.downcase, :content-available => "1", :message => message.message}
+	end
 
 	def createGcmPushNotifications(data)
 		n =  Rpush::Gcm::Notification.new
