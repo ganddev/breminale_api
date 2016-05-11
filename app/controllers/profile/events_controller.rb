@@ -22,6 +22,10 @@ class Profile::EventsController < ApplicationController
   def edit
   end
 
+  def search
+    @events = current_user.events.where("deleted = false AND name LIKE ?", "%#{params[:name]}%")
+  end
+
   # POST /events
   # POST /events.json
   def create
