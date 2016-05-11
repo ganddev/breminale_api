@@ -9,6 +9,13 @@ nav.navbar.navbar-inverse[style="border-radius:0px;"]
       = link_to 'Breminale', "/", class: "navbar-brand"
       
     .collapse.navbar-collapse#bs-navbar-collapse-1
+
+      ul.nav.navbar-nav.navbar-center
+       form class="navbar-form" role="search"
+        div class="input-group"
+          input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term"
+          button class="btn btn-default" type="submit"
+
       ul.nav.navbar-nav.navbar-right
         - unless user_signed_in?
           li
