@@ -14,6 +14,8 @@ class Event < ActiveRecord::Base
   has_attached_file :image,
   :default_url => ""
 
+	self.per_page = 10
+	
   after_commit :push_to_device, on: [:create, :update, :destroy]
   
   def push_to_device()
