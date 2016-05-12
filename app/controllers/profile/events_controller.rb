@@ -18,12 +18,12 @@ class Profile::EventsController < ApplicationController
     @event = ::Event.new
   end
 
-  # GET /events/1/edit
-  def edit
-  end
-
   def search
     @events = current_user.events.where("deleted = false AND name LIKE ?", "%#{params[:name]}%")
+  end
+
+  # GET /events/1/edit
+  def edit
   end
 
   # POST /events

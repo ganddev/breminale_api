@@ -3,11 +3,18 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   namespace :profile do
-    resources :events
+    resources :events do
+      collection do
+        get 'search'
+      end
+    end
     resources :locations
     resources :messages
   end
 
+
+  get '/profile/search', to: 'machines#search'
+  
   root 'welcome#index'
   
   mount API => '/'

@@ -11,7 +11,7 @@ nav.navbar.navbar-inverse[style="border-radius:0px;"]
     .collapse.navbar-collapse#bs-navbar-collapse-1
 
       ul.nav.navbar-nav.navbar-center
-        = bootstrap_form_tag url: '/search', method: 'GET' do |f|
+        = bootstrap_form_tag url: '/profile/events/search', method: 'GET' do |f|
           div.input-group
             = f.text_field :name, placeholder: 'Eventname', hide_label: true 
             span.input-group-btn
