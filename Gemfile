@@ -42,6 +42,8 @@ gem 'aws-sdk', '~> 2'
 
 gem 'hashie-forbidden_attributes'
 
+gem 'will_paginate', '~> 3.1.0'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 

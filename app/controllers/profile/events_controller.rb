@@ -5,7 +5,7 @@ class Profile::EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = current_user.events.where(deleted: false)
+    @events = current_user.events.where(deleted: false).paginate(:page => params[:page]).order('start_time ASC')
   end
 
   # GET /events/1
