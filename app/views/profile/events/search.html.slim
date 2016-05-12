@@ -1,3 +1,4 @@
+= link_to 'Neues Event', new_profile_event_path
 .row
   .col-xs-12
     table.table.table-hover.table-responsive
@@ -22,5 +23,5 @@
               - if policy(event).destroy?
                 =link_to profile_event_path(event), :method => :delete do
                   span.glyphicon.glyphicon-trash
-            
-= link_to 'Neues Event', new_profile_event_path
+
+= will_paginate @events
