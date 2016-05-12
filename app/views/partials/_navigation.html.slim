@@ -11,10 +11,11 @@ nav.navbar.navbar-inverse[style="border-radius:0px;"]
     .collapse.navbar-collapse#bs-navbar-collapse-1
 
       ul.nav.navbar-nav.navbar-center
-       form class="navbar-form" role="search"
-        div class="input-group"
-          input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term"
-          button class="btn btn-default" type="submit"
+        = bootstrap_form_tag url: '/search', method: 'GET' do |f|
+          div.input-group
+            = f.text_field :name, placeholder: 'Eventname', hide_label: true 
+            span.input-group-btn
+            = f.submit "Suchen", class: 'btn btn-default btn-block'
 
       ul.nav.navbar-nav.navbar-right
         - unless user_signed_in?
