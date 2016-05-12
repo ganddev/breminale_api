@@ -10,7 +10,6 @@ class PushService
 				createApnsPushNotifications(createApnsDataFromRessource(ressource), token)
 			}
 		end
-		Rpush.push #Push the notifications! Danger!!!
 	end
 
 	def pushMessage(message)
@@ -24,7 +23,6 @@ class PushService
 				createApnsPushNotifications(createApnsDataFromMessage(ressource), token)
 			}
 		end
-		Rpush.push #Push the notifications! Danger!!!
 	end
 
 	def createGcmDataFromMessage(message)
