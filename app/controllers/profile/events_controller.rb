@@ -18,6 +18,10 @@ class Profile::EventsController < ApplicationController
     @event = ::Event.new
   end
 
+  def search
+    @events = current_user.events.where("deleted = false AND name LIKE ?", "%#{params[:name]}%").paginate(:page => params[:page]).order('start_time ASC')
+  end
+
   # GET /events/1/edit
   def edit
   end

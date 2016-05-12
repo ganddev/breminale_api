@@ -23,6 +23,5 @@
               - if policy(event).destroy?
                 =link_to profile_event_path(event), :method => :delete do
                   span.glyphicon.glyphicon-trash
+
 = will_paginate @events
-
-
