@@ -51,6 +51,7 @@ class PushService
 	end
 
 	def createSilentApnsPushNotification(data, token)
+		byebug
 		n = Rpush::Apns::Notification.new
 		n.app = Rpush::Apns::App.find_by_name("ios_app")
 		n.device_token = token
@@ -65,7 +66,7 @@ class PushService
 	end
 
 	def createApnsDataFromRessource(ressource)
-		data = { :resource_type => ressource.class.name.split('::').last.downcase , :identifier => ressource.id, :content-available => "1" }
+		data = { :resource_type => ressource.class.name.split('::').last.downcase , :identifier => ressource.id }
 	end
 
 	def device_token_valid?(device_token)
