@@ -51,7 +51,6 @@ class PushService
 	end
 
 	def createSilentApnsPushNotification(data, token)
-		byebug
 		n = Rpush::Apns::Notification.new
 		n.app = Rpush::Apns::App.find_by_name("ios_app")
 		n.device_token = token
