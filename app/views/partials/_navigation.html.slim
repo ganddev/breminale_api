@@ -9,13 +9,10 @@ nav.navbar.navbar-inverse[style="border-radius:0px;"]
       = link_to 'Breminale', "/", class: "navbar-brand"
       
     .collapse.navbar-collapse#bs-navbar-collapse-1
-
-      ul.nav.navbar-nav.navbar-center
-        = bootstrap_form_tag url: '/profile/events/search', method: 'GET' do |f|
-          div.input-group
-            = f.text_field :name, placeholder: 'Eventname', hide_label: true 
-            span.input-group-btn
-            = f.submit "Suchen", class: 'btn btn-default btn-block'
+      =bootstrap_form_tag url: '/profile/events/search', method: 'GET', class: 'navbar-form navbar-left', role:'search' do |f|
+        div.form-group
+          = f.text_field :name, placeholder: 'Eventname', hide_label: true, class: 'form-control' 
+        = f.submit "Suchen", class: 'btn btn-default'
 
       ul.nav.navbar-nav.navbar-right
         - unless user_signed_in?

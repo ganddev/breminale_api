@@ -20,7 +20,7 @@ class PushService
 		if(::Device.where(device_type: 'ios').count > 0)
 			registration_ids = ::Device.where(device_type:'ios').pluck(:device_token)
 			registration_ids.each { |token|
-				createApnsPushNotification(createApnsDataFromMessage(message), token)
+				createApnsPushNotification(createApnsDataFromMessage(message),message, token)
 			}
 		end
 	end
@@ -41,11 +41,12 @@ class PushService
 		n.save!
 	end
 
-	def createApnsPushNotification(data, token)
+	def createApnsPushNotification(data,message, token)
 		n = Rpush::Apns::Notification.new
 		n.app = Rpush::Apns::App.find_by_name("ios_app")
 		n.device_token = token
 		n.data = data
+		n.alert = message.message
 		n.save!
 	end
 
