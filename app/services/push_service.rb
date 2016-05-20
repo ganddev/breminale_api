@@ -7,7 +7,7 @@ class PushService
 		if (::Device.where(device_type: 'ios').count > 0)
 			registration_ids = ::Device.where(device_type:'ios').pluck(:device_token)
 			registration_ids.each { |token|
-				createApnsPushNotifications(createApnsDataFromRessource(ressource), token)
+				createSilentApnsPushNotification(createApnsDataFromRessource(ressource), token)
 			}
 		end
 	end
@@ -20,7 +20,7 @@ class PushService
 		if(::Device.where(device_type: 'ios').count > 0)
 			registration_ids = ::Device.where(device_type:'ios').pluck(:device_token)
 			registration_ids.each { |token|
-				createApnsPushNotifications(createApnsDataFromMessage(ressource), token)
+				createApnsPushNotification(createApnsDataFromMessage(message),message, token)
 			}
 		end
 	end
@@ -30,7 +30,7 @@ class PushService
 	end
 
 	def createApnsDataFromMessage(message)
-		data = { :identifier => message.id, :ressource_type => message.class.name.split('::').last.downcase, :content-available => "1", :message => message.message}
+		data = { :identifier => message.id, :ressource_type => message.class.name.split('::').last.downcase, :message => message.message}
 	end
 
 	def createGcmPushNotifications(data)
@@ -41,20 +41,31 @@ class PushService
 		n.save!
 	end
 
-	def createApnsPushNotification(data, token)
-			n = Rpush::Apns::Notification.new
-			n.app = Rpush::Apns::App.find_by_name("ios_app")
-			n.device_token = token
-			n.data = data
-			n.save!
+	def createApnsPushNotification(data,message, token)
+		n = Rpush::Apns::Notification.new
+		n.app = Rpush::Apns::App.find_by_name("ios_app")
+		n.device_token = token
+		n.data = data
+		n.alert = message.message
+		n.save!
 	end
+
+	def createSilentApnsPushNotification(data, token)
+		n = Rpush::Apns::Notification.new
+		n.app = Rpush::Apns::App.find_by_name("ios_app")
+		n.device_token = token
+		n.data = data
+		n.content_available = true
+		n.save!
+	end
+
 
 	def createGcmDataFromRessource(ressource)
 		data = { :identifier => ressource.id, :ressource_type => ressource.class.name.split('::').last.downcase }
 	end
 
 	def createApnsDataFromRessource(ressource)
-		data = { :resource_type => ressource.class.name.split('::').last.downcase , :identifier => ressource.id, :content-available => "1" }
+		data = { :resource_type => ressource.class.name.split('::').last.downcase , :identifier => ressource.id }
 	end
 
 	def device_token_valid?(device_token)

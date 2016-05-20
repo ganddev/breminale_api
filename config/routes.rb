@@ -11,9 +11,6 @@ Rails.application.routes.draw do
     resources :locations
     resources :messages
   end
-
-
-  get '/profile/search', to: 'machines#search'
   
   root 'welcome#index'
   
