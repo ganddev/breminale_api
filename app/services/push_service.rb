@@ -7,7 +7,7 @@ class PushService
 		if (::Device.where(device_type: 'ios').count > 0)
 			registration_ids = ::Device.where(device_type:'ios').pluck(:device_token)
 			registration_ids.each { |token|
-				createSilentApnsPushNotification(createApnsDataFromRessource(ressource), token)
+				createSilentApnsPushNotification(createApnsDataFromRessource(ressource), token) if device_token_valid? token
 			}
 		end
 	end
@@ -20,7 +20,7 @@ class PushService
 		if(::Device.where(device_type: 'ios').count > 0)
 			registration_ids = ::Device.where(device_type:'ios').pluck(:device_token)
 			registration_ids.each { |token|
-				createApnsPushNotification(createApnsDataFromMessage(message),message, token)
+				createApnsPushNotification(createApnsDataFromMessage(message),message, token) if device_token_valid? token
 			}
 		end
 	end
