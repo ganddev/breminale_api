@@ -3,6 +3,7 @@ class API < Grape::API
   prefix 'api'
   version 'v1', using: :path
 	default_format :json
+  format :json
 
   error_formatter :json, ErrorFormatter
 
