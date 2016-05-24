@@ -17,6 +17,9 @@
             td= event.description
             td= event.location.name
             td
+              - if policy(event).show?
+                =link_to profile_event_path(event)
+                  span.glyphicon.glyphicon-eye-open
               - if policy(event).update?
                 =link_to edit_profile_event_path(event)
                   span.glyphicon.glyphicon-pencil

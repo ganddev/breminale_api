@@ -18,6 +18,9 @@
             td= location.latitude
             td= location.longitude
             td
+              - if policy(location).show?
+                =link_to profile_location_path(location)
+                  span.glyphicon.glyphicon-eye-open
               - if policy(location).update?
                  =link_to edit_profile_location_path(location)
                   span.glyphicon.glyphicon-pencil
