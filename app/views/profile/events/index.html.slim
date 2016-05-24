@@ -8,6 +8,7 @@
           th Name
           th Beschreibung
           th Location
+          th Datum
           th Optionen
       tbody
         - @events.each do |event|
@@ -16,6 +17,7 @@
             td= event.name
             td= event.description
             td= event.location.name
+            td= event.start_time.strftime('%H:%M %d.%m.%Y')
             td
               - if policy(event).show?
                 =link_to profile_event_path(event)
