@@ -1,3 +1,4 @@
+require 'soundcloud'
 class Event < ActiveRecord::Base
 
 	belongs_to :user
@@ -15,10 +16,16 @@ class Event < ActiveRecord::Base
   :default_url => ""
 
 	self.per_page = 10
-	
+
+  
   after_commit :push_to_device, on: [:create, :update, :destroy]
   
   def push_to_device()
+
+  	# register the client
+	client = Soundcloud.new(:client_id => '469443570702bcc59666de5950139327')
+	user = client.get('/resolve', :url => self.soundcloud_url)
+	byebug
     ::PushService.new().pushUpdates(self)
   end
 end
