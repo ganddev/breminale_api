@@ -6,16 +6,16 @@ javascript:
       });
       SC.resolve(soundcloudurl).then(function(result){
         $('#event_soundcloud_user_id').val(result["id"]);
-        console.log("submit");
-        $('#submit_form_id').submit();
+        console.log("submit success");
+        //$('#submit_form_id').submit();
       }).catch(function(error){
-        console.log("submit");
+        console.log("submit error");
         alert('Soundcloud URL konnte nicht auf gelöst werden!');
-        $('#submit_form_id').submit();
+        //$('#submit_form_id').submit();
       });
     } else {
-      console.log("submit");
-      $('#submit_form_id').submit();
+      console.log("submit empty");
+      //$('#submit_form_id').submit();
     }
   }
 
@@ -43,4 +43,4 @@ javascript:
       = f.file_field :image, label: "Bild"
   
       
-  = f.button "Save", id: "submit_form_btn", onclick: "retriveSoundcloudUserId($('#soundcloud').val());".html_safe
+  = f.button "Speichern", type:"", id: "submit_form_btn", onclick: "retriveSoundcloudUserId($('#soundcloud').val());".html_safe
