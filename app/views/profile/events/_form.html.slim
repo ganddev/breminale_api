@@ -6,12 +6,15 @@ javascript:
       });
       SC.resolve(soundcloudurl).then(function(result){
         $('#event_soundcloud_user_id').val(result["id"]);
+        console.log("submit");
         $('#submit_form_id').submit();
       }).catch(function(error){
+        console.log("submit");
         alert('Soundcloud URL konnte nicht auf gelöst werden!');
         $('#submit_form_id').submit();
       });
     } else {
+      console.log("submit");
       $('#submit_form_id').submit();
     }
   }
