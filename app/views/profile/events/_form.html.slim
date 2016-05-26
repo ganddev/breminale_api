@@ -1,25 +1,4 @@
-javascript:
-  function retriveSoundcloudUserId(soundcloudurl) {
-    if(soundcloudurl.length > 1) {
-      SC.initialize({
-        client_id: '469443570702bcc59666de5950139327'
-      });
-      SC.resolve(soundcloudurl).then(function(result){
-        $('#event_soundcloud_user_id').val(result["id"]);
-        console.log("submit success");
-        $('#submit_form_id').submit();
-      }).catch(function(error){
-        console.log("submit error");
-        alert('Soundcloud URL konnte nicht auf gelöst werden!');
-        $('#submit_form_id').submit();
-      });
-    } else {
-      console.log("submit empty");
-      $('#submit_form_id').submit();
-    }
-  }
-
-= bootstrap_form_for([:profile, @event],remote: true, multipart: true, :html => {:id => "submit_form_id", :name => 'form'}) do |f|
+= bootstrap_form_for([:profile, @event],multipart: true, :html => {:id => "submit_form_id", :name => 'form'}) do |f|
   .row
     .col-xs-12.col-md-6
       = f.text_field :name, label: "Name"
@@ -40,7 +19,5 @@ javascript:
 
   .row
     .col-xs-12.col-md-6
-      = f.file_field :image, label: "Bild"
-  
-      
-  = f.button "Speichern", type:"", id: "submit_form_btn", onclick: "retriveSoundcloudUserId($('#soundcloud').val());".html_safe
+      = f.file_field :image, label: "Bild"  
+  = f.submit "Save"

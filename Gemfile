@@ -39,6 +39,8 @@ gem 'devise'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '~> 2'
 
+gem 'soundcloud'
+
 
 gem 'hashie-forbidden_attributes'
 

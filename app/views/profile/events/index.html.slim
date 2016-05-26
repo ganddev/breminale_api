@@ -15,7 +15,7 @@
           tr
             td= event.id
             td= event.name
-            td= event.description
+            td= truncate(event.description, length: 50)
             td= event.location.name
             td= event.start_time.strftime('%H:%M %d.%m.%Y')
             td

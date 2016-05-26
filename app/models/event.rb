@@ -1,3 +1,4 @@
+require 'soundcloud'
 class Event < ActiveRecord::Base
 
 	belongs_to :user
@@ -15,9 +16,24 @@ class Event < ActiveRecord::Base
   :default_url => ""
 
 	self.per_page = 10
-	
+
+  
+  before_save  :resolve_soundcloud_user_id, on:[:create, :update]
   after_commit :push_to_device, on: [:create, :update, :destroy]
   
+
+  def resolve_soundcloud_user_id()
+  	if self.soundcloud_url.present? && !self.soundcloud_url.empty?
+  		client = Soundcloud.new(:client_id => Rails.application.secrets.soundcloud_client_id)
+  		begin
+  			self.soundcloud_user_id = client.get('/resolve', :url => self.soundcloud_url)[:id]
+  		rescue Soundcloud::ResponseError => e
+  			self.soundcloud_user_id = ''
+  		end
+  		
+  	end
+  end
+
   def push_to_device()
     ::PushService.new().pushUpdates(self)
   end
