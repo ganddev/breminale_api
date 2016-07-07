@@ -58,6 +58,8 @@ gem "pundit"
 
 gem 'puma'
 
+gem 'airbrake'
+
 #Authorization
 gem 'cancancan', '~> 1.10'
 
