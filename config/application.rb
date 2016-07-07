@@ -23,6 +23,9 @@ module BreminaleRails
     config.time_zone = 'Berlin'
     config.active_record.default_timezone = :local
 
+    config.logger = Logger.new(STDOUT)
+
+
    ## Newly Added code to set up the api code
     config.autoload_paths += Dir[Rails.root.join('app','api','*')]
     config.autoload_paths += Dir["#{config.root}/app/models/**/"]
