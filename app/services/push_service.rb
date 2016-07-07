@@ -37,11 +37,15 @@ class PushService
 	end
 
 	def createGcmPushNotifications(data)
-		n =  Rpush::Gcm::Notification.new
-		n.app = Rpush::Gcm::App.find_by_name("android_app")
-		n.registration_ids = ::Device.where(device_type:'android').pluck(:device_token)
-		n.data = data
-		n.save!
+		devices = ::Device.where(device_type:'android').pluck(:device_token)
+		sliced_devices = devices.each_slice(1000).to_a
+		sliced_devices.each{ |d|
+			n =  Rpush::Gcm::Notification.new
+			n.app = Rpush::Gcm::App.find_by_name("android_app")
+			n.registration_ids = d
+			n.data = data
+			n.save!
+		}
 	end
 
 	def createApnsPushNotification(data,message, token)
