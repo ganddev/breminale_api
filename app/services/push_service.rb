@@ -1,7 +1,6 @@
 class PushService
 
 	def pushUpdates(ressource)
-		puts "Push updates to devices!"
 		if (::Device.where(device_type: 'android').count > 0)
 			createGcmPushNotifications(createGcmDataFromRessource(ressource))
 		end
@@ -27,12 +26,10 @@ class PushService
 	end
 
 	def createGcmDataFromMessage(message)
-		puts "Create gcm data!"
 		data = { :identifier => message.id, :ressource_type => message.class.name.split('::').last.downcase, :message => message.message}
 	end
 
 	def createApnsDataFromMessage(message)
-		puts "Create apns data!"
 		data = { :identifier => message.id, :ressource_type => message.class.name.split('::').last.downcase, :message => message.message}
 	end
 
