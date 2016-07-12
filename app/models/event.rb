@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
 
   
   before_save  :resolve_soundcloud_user_id, on:[:create, :update]
-  after_commit :push_to_device, on: [:create, :update, :destroy]
+  #after_commit :push_to_device, on: [:create, :update, :destroy]
   
 
   def resolve_soundcloud_user_id()

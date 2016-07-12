@@ -17,7 +17,7 @@ class Location < ActiveRecord::Base
 	attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
   attachment_size: { less_than: 1.megabytes }
 
-	after_commit :push_to_device, on: [:create, :update, :destroy]
+	#after_commit :push_to_device, on: [:create, :update, :destroy]
   
   def push_to_device()
     ::PushService.new().pushUpdates(self)
