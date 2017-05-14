@@ -80,6 +80,9 @@ Rails.application.configure do
   #configuration for aws s3
   config.paperclip_defaults = {
     :storage => :s3,
+    :url => ":s3_alias_url",
+    :path => "/:class/:attachment/:id_partition/:style/:filename",
+    :s3_host_alias => ENV['AWS_CLF'],
     :s3_credentials => {
       :s3_region => ENV['AWS_REGION'],
       :bucket => ENV['S3_BUCKET'],
