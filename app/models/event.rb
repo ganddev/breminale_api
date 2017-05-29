@@ -12,16 +12,15 @@ class Event < ActiveRecord::Base
     attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
     attachment_size: { less_than: 5.megabytes },
 
-  has_attached_file :image,
-  :styles => {
+  has_attached_file :image, styles => {
       small: 'x320>',
       medium: 'x640>',
       large: 'x1280>'
-    },
+  },
   :convert_options => {
      :small => "-quality 60 -strip",
      :medium => "-quality 75 -strip"
-    },
+  },
   :default_url => ""
 
 	self.per_page = 10
