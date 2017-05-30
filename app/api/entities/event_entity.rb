@@ -7,6 +7,12 @@ module Entities
 		expose :image_url, documentation: {type: "String", desc: "Link to the original image" } do |event, options|
 			event.image.url
 		end
+		expose :image_url_medium, documentation: {type: "String", desc: "Link to the medium image" } do |event, options|
+			event.image.url(:medium)
+		end
+		expose :image_url_small, documentation: {type: "String", desc: "Link to the small image" } do |event, options|
+			event.image.url(:small)
+		end
 		expose :start_time, documentation: {type: "String", desc: "The start time of the event"} do |event, options|
 			event.start_time.in_time_zone
 		end
