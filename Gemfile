@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby "2.2.3"
+ruby "2.4.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '5.0.2'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'pg', '~> 0.18.4'
@@ -63,8 +63,6 @@ gem 'airbrake'
 #Authorization
 gem 'cancancan', '~> 1.10'
 
-gem 'factory_girl_rails', :group => [:development, :test]
-
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -76,6 +74,7 @@ group :test do
   gem 'email_spec'
   gem 'launchy'
   gem 'capybara'
+  gem 'factory_bot'
   gem 'grape-entity-matchers'
 end
 
