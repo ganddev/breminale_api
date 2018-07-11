@@ -23,12 +23,6 @@ class Location < ActiveRecord::Base
     ::PushService.new().pushUpdates(self)
   end
   
-	after_initialize :init
-
-	def init
-		self.deleted = false
-	end
-
 	def self.values
 		::Location.all.map do |location|
 			[location.name, location.id]
