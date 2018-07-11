@@ -37,7 +37,7 @@ gem 'devise'
 
 #s3
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk', '~> 3'
 
 gem 'soundcloud'
 
